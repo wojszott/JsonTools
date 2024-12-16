@@ -1,46 +1,29 @@
 package pl.put.poznan.transformer.rest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import pl.put.poznan.transformer.logic.TextTransformer;
-
-import java.util.Arrays;
-
+import pl.put.poznan.transformer.model.TextTransformationRequest;
+import pl.put.poznan.transformer.model.TextTransformationResponse;
 
 @RestController
-@RequestMapping("/{text}")
+@RequestMapping("/api/transform")
 public class TextTransformerController {
 
     private static final Logger logger = LoggerFactory.getLogger(TextTransformerController.class);
 
-    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
-    public String get(@PathVariable String text,
-                              @RequestParam(value="transforms", defaultValue="upper,escape") String[] transforms) {
+    @PostMapping(produces = "application/json", consumes = "application/json")
+    public TextTransformationResponse transform(@RequestBody TextTransformationRequest request) {
+        // Logowanie danych wejściowych
+        logger.debug("Received text: {}", request.getText());
+        logger.debug("Requested transforms: {}", (Object) request.getTransforms());
 
-        // log the parameters
-        logger.debug(text);
-        logger.debug(Arrays.toString(transforms));
+        // Obsługa transformacji
+        TextTransformer transformer = new TextTransformer(request.getTransforms());
+        String transformedText = transformer.transform(request.getText());
 
-        // perform the transformation, you should run your logic here, below is just a silly example
-        TextTransformer transformer = new TextTransformer(transforms);
-        return transformer.transform(text);
+        // Zwrócenie wyniku
+        return new TextTransformationResponse(request.getText(), transformedText);
     }
-
-    @RequestMapping(method = RequestMethod.POST, produces = "application/json")
-    public String post(@PathVariable String text,
-                      @RequestBody String[] transforms) {
-
-        // log the parameters
-        logger.debug(text);
-        logger.debug(Arrays.toString(transforms));
-
-        // perform the transformation, you should run your logic here, below is just a silly example
-        TextTransformer transformer = new TextTransformer(transforms);
-        return transformer.transform(text);
-    }
-
-
-
 }
-
-

@@ -1,18 +1,32 @@
 package pl.put.poznan.transformer.logic;
 
-/**
- * This is just an example to show that the logic should be outside the REST service.
- */
-public class TextTransformer {
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
 
+public class TextTransformer {
     private final String[] transforms;
 
-    public TextTransformer(String[] transforms){
+    private static final Map<String, Function<String, String>> FUNCTIONS = new HashMap<>();
+
+    static {
+        FUNCTIONS.put("upper", String::toUpperCase);
+        FUNCTIONS.put("lower", String::toLowerCase);
+        FUNCTIONS.put("reverse", text -> new StringBuilder(text).reverse().toString());
+    }
+
+    public TextTransformer(String[] transforms) {
         this.transforms = transforms;
     }
 
-    public String transform(String text){
-        // of course, normally it would do something based on the transforms
-        return text.toUpperCase();
+    public String transform(String text) {
+        String result = text;
+        for (String transform : transforms) {
+            Function<String, String> function = FUNCTIONS.get(transform.toLowerCase());
+            if (function != null) {
+                result = function.apply(result);
+            }
+        }
+        return result;
     }
 }
