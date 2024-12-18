@@ -1,33 +1,44 @@
 package pl.put.poznan.transformer.logic;
 
-/**
- * This is the logic for transforming text.
- */
+import java.util.ArrayList;
+import java.util.List;
+
 public class TextTransformer {
+    private final List<Transform> transforms;
 
-    private final String[] transforms;
+    // Konstruktor przyjmuje listę nazw transformacji
+    public TextTransformer(String[] transformNames) {
+        if (transformNames == null || transformNames.length == 0) {
+            throw new IllegalArgumentException("Transform names cannot be null or empty");
+        }
+        this.transforms = new ArrayList<>();
 
-    public TextTransformer(String[] transforms) {
-        this.transforms = transforms;
-    }
-
-    public String transform(String text) {
-        String result = text;
-
-        for (String transform : transforms) {
-            switch (transform.toLowerCase()) {
+        // Mapowanie nazw transformacji na ich implementacje
+        for (String transformName : transformNames) {
+            switch (transformName.toLowerCase()) {
+                case "prettify":
+                    transforms.add(new PrettifyTransformer());
+                    break;
                 case "upper":
-                    result = result.toUpperCase();
+                    transforms.add(new UppercaseTransformer());
+                    break;
+                case "lower":
+                    transforms.add(new LowercaseTransformer());
                     break;
                 case "reverse":
-                    result = new StringBuilder(result).reverse().toString();
+                    transforms.add(new ReverseTransformer());
                     break;
                 default:
-                    // Nieznana transformacja
-                    break;
+                    throw new IllegalArgumentException("Unknown transform: " + transformName + " ");
             }
         }
+    }
 
-        return result;
+    // Metoda wykonująca wszystkie transformacje
+    public String transform(String text) {
+        for (Transform transform : transforms) {
+            text = transform.transform(text);
+        }
+        return text;
     }
 }
