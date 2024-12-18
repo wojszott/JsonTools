@@ -1,19 +1,17 @@
 package pl.put.poznan.transformer.model;
 
 public class TextTransformationResponse {
-    private String originalText;   // Oryginalny tekst
-    private String transformedText; // Przekształcony tekst
+    private String transformedText;
 
-    public TextTransformationResponse(String originalText, String transformedText) {
-        this.originalText = originalText;
+    public TextTransformationResponse(String transformedText) {
         this.transformedText = transformedText;
-    }
-
-    public String getOriginalText() {
-        return originalText;
     }
 
     public String getTransformedText() {
         return transformedText;
+    }
+
+    public void setTransformedText(String transformedText) {
+        this.transformedText = transformedText;
     }
 }

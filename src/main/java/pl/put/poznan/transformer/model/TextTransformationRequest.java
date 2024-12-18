@@ -1,16 +1,10 @@
 package pl.put.poznan.transformer.model;
 
 public class TextTransformationRequest {
-    private String text;          // Tekst do transformacji
-    private String[] transforms;  // Lista transformacji
+    private String text;
+    private String[] transforms;
 
-    public TextTransformationRequest() {}
-
-    public TextTransformationRequest(String text, String[] transforms) {
-        this.text = text;
-        this.transforms = transforms;
-    }
-
+    // Gettery i settery
     public String getText() {
         return text;
     }
