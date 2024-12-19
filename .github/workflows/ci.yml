@@ -22,7 +22,7 @@ jobs:
         uses: actions/setup-java@v2  # Set up Java 17 environment
         with:
           java-version: '17'
-          distribution: 'adoptopenjdk'
+          distribution: 'temurin'
 
       - name: Build with Maven
         run: mvn clean package  # Build the application using Maven
