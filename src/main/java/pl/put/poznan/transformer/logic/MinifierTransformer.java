@@ -1,15 +1,7 @@
 package pl.put.poznan.transformer.logic;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-/**
- * Klasa `JsonMinifier` odpowiada za zminifikowanie danych JSON.
- * Implementuje interfejs Transform.
- *
- * @author Paweł Muryn
- * @version 1.0
- */
-public class JsonMinifier implements Transform {
+public class MinifierTransformer implements Transform {
 
     /**
      * Przekształca wejściowy JSON na jego zminifikowaną wersję.
@@ -21,10 +13,14 @@ public class JsonMinifier implements Transform {
     @Override
     public String transform(String input) {
         try {
+            // Tworzenie ObjectMapper
             ObjectMapper objectMapper = new ObjectMapper();
+            // Parsowanie JSON do obiektu Java
             Object jsonObject = objectMapper.readValue(input, Object.class);
+            // Serializacja obiektu do zminifikowanego JSON
             return objectMapper.writeValueAsString(jsonObject);
         } catch (Exception e) {
+            // Obsługa błędu - np. zwrócenie pustego stringa lub wiadomości o błędzie
             return "Błąd podczas transformacji JSON: " + e.getMessage();
         }
     }

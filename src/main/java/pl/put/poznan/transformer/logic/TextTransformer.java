@@ -3,10 +3,37 @@ package pl.put.poznan.transformer.logic;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Klasa odpowiedzialna za zarządzanie i wykonywanie transformacji tekstu.
+ *
+ * <p>Tworzy listę transformacji na podstawie przekazanych nazw oraz wykonuje je w ustalonej kolejności
+ * na dostarczonym tekście. Obsługuje różne rodzaje transformacji, takie jak:
+ * <ul>
+ * <li>Prettify - formatowanie JSON-a na wersję nie minimalizowaną</li>
+ * <li>Upper - konwersja tekstu na wielkie litery</li>
+ * <li>Lower - konwersja tekstu na małe litery</li>
+ * <li>Reverse - odwracanie kolejności znaków</li>
+ * <li>Minify - minimalizacja JSON-a</li>
+ * <li>Simplify - uproszczenie JSON-a</li>
+ * </ul>
+ * </p>
+ *
+ * @author Spitree, sathell, woijk
+ * @version 1.1.4
+ */
 public class TextTransformer {
     private final List<Transform> transforms;
 
-    // Konstruktor przyjmuje listę nazw transformacji
+    /**
+     * Tworzy instancję {@code TextTransformer} na podstawie przekazanych nazw transformacji.
+     *
+     * <p>W konstruktorze mapowane są nazwy transformacji na ich odpowiednie implementacje.
+     * W przypadku nieznanej transformacji lub pustej tablicy nazw, rzucany jest wyjątek.</p>
+     *
+     * @param transformNames tablica nazw transformacji do wykonania
+     * @throws IllegalArgumentException jeśli tablica nazw transformacji jest pusta,
+     *                                  null lub zawiera nieznaną nazwę
+     */
     public TextTransformer(String[] transformNames) {
         if (transformNames == null || transformNames.length == 0) {
             throw new IllegalArgumentException("Transform names cannot be null or empty");
@@ -29,15 +56,25 @@ public class TextTransformer {
                     transforms.add(new ReverseTransformer());
                     break;
                 case "minify":
-                    transforms.add(new JsonMinifier());
+                    transforms.add(new MinifierTransformer());
+                    break;
+                case "simplify":
+                    //transforms.add(new SimplifierTransformer());
                     break;
                 default:
-                    throw new IllegalArgumentException("Unknown transform: " + transformName + " ");
+                    throw new IllegalArgumentException("Unknown transform: " + transformName);
             }
         }
     }
 
-    // Metoda wykonująca wszystkie transformacje
+    /**
+     * Wykonuje wszystkie transformacje na dostarczonym tekście w ustalonej kolejności.
+     *
+     * <p>Każda transformacja modyfikuje tekst, przekazując go do kolejnej transformacji.</p>
+     *
+     * @param text tekst wejściowy, na którym mają zostać wykonane transformacje
+     * @return wynikowy tekst po wykonaniu wszystkich transformacji
+     */
     public String transform(String text) {
         for (Transform transform : transforms) {
             text = transform.transform(text);
