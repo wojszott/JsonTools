@@ -16,15 +16,18 @@ public class TextTransformerController {
 
     private static final Logger logger = LoggerFactory.getLogger(TextTransformerController.class);
 
-    // Istniejąca metoda
+
     @PostMapping(produces = "application/json", consumes = "application/json")
     public TextTransformationResponse transform(@RequestBody TextTransformationRequest request) {
+        // Logowanie danych wejściowych
         logger.debug("Received text: {}", request.getText());
         logger.debug("Requested transforms: {}", (Object) request.getTransforms());
 
+        // Obsługa transformacji
         TextTransformer transformer = new TextTransformer(request.getTransforms());
         String transformedText = transformer.transform(request.getText());
 
+        // Zwrócenie wyniku
         return new TextTransformationResponse(request.getText(), transformedText);
     }
 
