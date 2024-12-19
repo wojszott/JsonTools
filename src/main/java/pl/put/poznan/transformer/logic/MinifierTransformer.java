@@ -1,7 +1,7 @@
 package pl.put.poznan.transformer.logic;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class JsonMinifier implements Transform {
+public class MinifierTransformer implements Transform {
 
     @Override
     public String transform(String input) {
