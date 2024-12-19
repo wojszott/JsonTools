@@ -68,21 +68,23 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
             <plugin>
                 <groupId>pl.project13.maven</groupId>
                 <artifactId>git-commit-id-plugin</artifactId>
-                <version>4.0.4</version>
+                <version>4.0.4</version>  <!-- Update to the latest version -->
                 <executions>
                     <execution>
                         <goals>
-                            <goal>tag</goal>
+                            <goal>revision</goal>  <!-- Use 'revision' instead of 'tag' -->
                         </goals>
                     </execution>
                 </executions>
                 <configuration>
-                    <tagName>v${project.version}</tagName>
+                    <generateGitCommitIdFile>false</generateGitCommitIdFile>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
