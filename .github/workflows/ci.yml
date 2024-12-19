@@ -4,11 +4,11 @@ on:
   push:
     branches:
       - main  # Workflow will run on push to 'main' branch
-      - Basic-Utility
+      - Basic-Utility # Workflow will run on push to 'Basic-Utility' branch
   pull_request:
     branches:
       - main  # Workflow will run on pull request to 'main' branch
-      - Basic-Utility
+      - Basic-Utility # Workflow will run on push to 'Basic-Utility' branch
 
 jobs:
   build:
