@@ -3,15 +3,15 @@ package pl.put.poznan.transformer.logic;
 /**
  * Klasa implementująca transformację polegającą na odwróceniu kolejności znaków w tekście.
  *
- * <p>Wszystkie znaki w podanym ciągu znaków zostają odwrócone,
- * tak że ostatni znak staje się pierwszym, a pierwszy ostatnim.</p>
+ * Wszystkie znaki w podanym ciągu znaków zostają odwrócone,
+ * tak że ostatni znak staje się pierwszym, a pierwszy ostatnim.
  *
- * <p>Przykład:
+ * Przykład:
  * <ul>
  * <li>Wejście: "example"</li>
  * <li>Wyjście: "elpmaxe"</li>
  * </ul>
- * </p>
+ *
  *
  * @author Spitree
  * @version 1.1.4
