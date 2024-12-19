@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - main  # Workflow will run on push to 'main' branch
+      - Basic-Utility
   pull_request:
     branches:
       - main  # Workflow will run on pull request to 'main' branch
+      - Basic-Utility
 
 jobs:
   build:
@@ -20,6 +22,7 @@ jobs:
         uses: actions/setup-java@v2  # Set up Java 17 environment
         with:
           java-version: '17'
+          distribution: 'temurin'
 
       - name: Build with Maven
         run: mvn clean package  # Build the application using Maven
