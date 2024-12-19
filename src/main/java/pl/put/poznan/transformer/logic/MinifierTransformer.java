@@ -29,7 +29,7 @@ public class MinifierTransformer implements Transform {
      * Domyślny konstruktor dla klasy JsonMinifier.
      * Inicjalizuje instancję klasy, nie wykonując dodatkowych operacji.
      */
-    public JsonMinifier() {
+    public MinifierTransformer() {
         // Domyślny konstruktor
     }
 }
