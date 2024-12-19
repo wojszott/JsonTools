@@ -28,8 +28,9 @@ public class TextTransformer {
                 case "reverse":
                     transforms.add(new ReverseTransformer());
                     break;
-                case "mini":
+                case "minify":
                     transforms.add(new JsonMinifier());
+                    break;
                 default:
                     throw new IllegalArgumentException("Unknown transform: " + transformName + " ");
             }

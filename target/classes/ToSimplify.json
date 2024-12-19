@@ -1,0 +1,35 @@
+{
+  "metadata": {
+    "id": 12345,
+    "type": "project",
+    "timestamp": "2024-12-18T00:00:00Z"
+  },
+  "data": {
+    "details": {
+      "name": "Example Project",
+      "owner": {
+        "name": "John Doe",
+        "contact": {
+          "email": "johndoe@example.com",
+          "phone": "123-456-7890"
+        }
+      }
+    },
+    "config": {
+      "settings": {
+        "optionA": true,
+        "optionB": false
+      },
+      "files": [
+        {
+          "filename": "file1.txt",
+          "size": "15KB"
+        },
+        {
+          "filename": "file2.txt",
+          "size": "25KB"
+        }
+      ]
+    }
+  }
+}
