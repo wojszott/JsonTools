@@ -1,36 +1,40 @@
 package pl.put.poznan.transformer.model;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import java.util.List;
-
+/**
+ * Klasa reprezentująca odpowiedź po przetworzeniu tekstu.
+ *
+ * <p>Obiekt tej klasy zawiera przekształcony tekst, który jest wynikiem zastosowania określonych transformacji.</p>
+ *
+ * @author Spitree, sathell, woijk
+ * @version 1.1.4
+ */
 public class TextTransformationResponse {
-    private String originalText;   // Oryginalny tekst
     private String transformedText; // Przekształcony tekst
 
-    public TextTransformationResponse(String originalText, String transformedText) {
-        this.originalText = originalText;
+    /**
+     * Tworzy obiekt {@code TextTransformationResponse} z przekształconym tekstem.
+     *
+     * @param transformedText przekształcony tekst
+     */
+    public TextTransformationResponse(String transformedText) {
         this.transformedText = transformedText;
     }
 
-    public String getOriginalText() {
-        return originalText;
-    }
-
+    /**
+     * Pobiera przekształcony tekst.
+     *
+     * @return przekształcony tekst
+     */
     public String getTransformedText() {
         return transformedText;
     }
 
-    public String toJsonWithSelectedFields(List<String> selectedFields) throws Exception {
-        ObjectMapper mapper = new ObjectMapper();
-        ObjectNode node = mapper.createObjectNode();
-
-        if (selectedFields.contains("originalText")) {
-            node.put("originalText", this.getOriginalText());
-        }
-        if (selectedFields.contains("transformedText")) {
-            node.put("transformedText", this.getTransformedText());
-        }
-        return mapper.writeValueAsString(node);
+    /**
+     * Ustawia przekształcony tekst.
+     *
+     * @param transformedText przekształcony tekst
+     */
+    public void setTransformedText(String transformedText) {
+        this.transformedText = transformedText;
     }
 }

@@ -1,29 +1,55 @@
 package pl.put.poznan.transformer.model;
 
+/**
+ * Klasa reprezentująca żądanie przekształcenia tekstu.
+ *
+ * <p>Obiekt tej klasy zawiera dane wejściowe potrzebne do wykonania transformacji tekstu:
+ * <ul>
+ * <li>Tablicę nazw transformacji, które mają zostać wykonane.</li>
+ * <li>Tekst, który ma zostać poddany transformacjom.</li>
+ * </ul>
+ * </p>
+ *
+ * @author Spitree, sathell, woijk
+ * @version 1.1.4
+ */
 public class TextTransformationRequest {
-    private String text;          // Tekst do transformacji
-    private String[] transforms;  // Lista transformacji
+    private String[] transforms; // Tablica nazw transformacji (np. "prettify", "upper")
+    private String text;         // Tekst, który ma zostać przetworzony
 
-    public TextTransformationRequest() {}
-
-    public TextTransformationRequest(String text, String[] transforms) {
-        this.text = text;
-        this.transforms = transforms;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
+    /**
+     * Pobiera listę nazw transformacji, które mają zostać zastosowane.
+     *
+     * @return tablica nazw transformacji
+     */
     public String[] getTransforms() {
         return transforms;
     }
 
+    /**
+     * Ustawia listę nazw transformacji, które mają zostać zastosowane.
+     *
+     * @param transforms tablica nazw transformacji
+     */
     public void setTransforms(String[] transforms) {
         this.transforms = transforms;
+    }
+
+    /**
+     * Pobiera tekst, który ma zostać przetworzony.
+     *
+     * @return tekst wejściowy
+     */
+    public String getText() {
+        return text;
+    }
+
+    /**
+     * Ustawia tekst, który ma zostać przetworzony.
+     *
+     * @param text tekst wejściowy
+     */
+    public void setText(String text) {
+        this.text = text;
     }
 }

@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"pl.put.poznan.transformer.logic","c":"JsonMinifier","l":"JsonMinifier()","u":"%3Cinit%3E()"},{"p":"pl.put.poznan.transformer.logic","c":"JsonMinifier","l":"transform(String)","u":"transform(java.lang.String)"}];updateSearchResults();
