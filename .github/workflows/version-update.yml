@@ -3,7 +3,7 @@ name: Update Version and Tag
 on:
   push:
     branches:
-      - Basic-Utility
+      - main
 
 jobs:
   update-version:
