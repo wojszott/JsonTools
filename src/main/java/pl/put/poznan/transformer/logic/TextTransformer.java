@@ -59,7 +59,7 @@ public class TextTransformer {
                     transforms.add(new MinifierTransformer());
                     break;
                 case "simplify":
-                    //transforms.add(new SimplifierTransformer());
+                    transforms.add(new SimplifyTransformer(new String[]{}));
                     break;
                 default:
                     throw new IllegalArgumentException("Unknown transform: " + transformName);
