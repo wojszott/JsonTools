@@ -19,6 +19,12 @@ import org.springframework.context.annotation.ComponentScan;
 public class TextTransformerApplication {
 
     /**
+     * Konstruktor domyślny. Inicjalizuje instancję klasy TextTransformerApplication.
+     */
+    public TextTransformerApplication() {
+        // Domyślny konstruktor
+    }
+    /**
      * Główna metoda uruchamiająca aplikację.
      *
      * <p>Metoda wykorzystuje {@link SpringApplication#run(Class, String[])} do inicjalizacji

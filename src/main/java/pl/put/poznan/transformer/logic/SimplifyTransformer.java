@@ -14,16 +14,13 @@ import java.util.Iterator;
  * Klasa implementująca transformację polegającą na uproszczeniu struktury JSON poprzez
  * zachowanie tylko określonych właściwości.
  *
- * <p>Transformacja ta pozwala na filtrowanie struktury JSON i zachowanie tylko tych pól,
- * które zostały określone w przekazanym zestawie nazw właściwości.</p>
+ * Transformacja ta pozwala na filtrowanie struktury JSON i zachowanie tylko tych pól,
+ * które zostały określone w przekazanym zestawie nazw właściwości.
  *
- * <p>Przykład użycia:
- * <pre>
+ * Przykład użycia:
  * String[] properties = {"id", "name"};
  * SimplifyTransformer transformer = new SimplifyTransformer(properties);
  * String result = transformer.transform(jsonString);
- * </pre>
- * </p>
  */
 public class SimplifyTransformer implements Transform {
     private final Set<String> propertiesToKeep;

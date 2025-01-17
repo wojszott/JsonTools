@@ -19,6 +19,12 @@ package pl.put.poznan.transformer.logic;
 public class ReverseTransformer implements Transform {
 
     /**
+     * Konstruktor domyślny. Inicjalizuje instancję klasy ReverseTransformer.
+     */
+    public ReverseTransformer() {
+        // Domyślny konstruktor
+    }
+    /**
      * Odwraca kolejność znaków w podanym tekście wejściowym.
      *
      * @param input tekst wejściowy, którego kolejność znaków ma zostać odwrócona

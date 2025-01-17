@@ -12,6 +12,12 @@ package pl.put.poznan.transformer.logic;
 public class LowercaseTransformer implements Transform {
 
     /**
+     * Konstruktor domyślny. Inicjalizuje instancję klasy LowercaseTransformer.
+     */
+    public LowercaseTransformer() {
+        // Domyślny konstruktor
+    }
+    /**
      * Przekształca tekst wejściowy, zamieniając wszystkie znaki na małe litery.
      *
      * <p>Jeśli tekst wejściowy zawiera znaki specjalne lub cyfry, pozostają one niezmienione.</p>

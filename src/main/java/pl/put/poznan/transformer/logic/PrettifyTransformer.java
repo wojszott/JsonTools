@@ -17,6 +17,12 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 public class PrettifyTransformer implements Transform {
 
     /**
+     * Konstruktor domyślny. Inicjalizuje instancję klasy PrettifyTransformer.
+     */
+    public PrettifyTransformer() {
+        // Domyślny konstruktor
+    }
+    /**
      * Przekształca wejściowy tekst JSON na sformatowany, czytelny tekst.
      *
      * <p>Metoda korzysta z biblioteki Jackson do parsowania i ponownego generowania JSON-a
