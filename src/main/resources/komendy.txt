@@ -1,0 +1,14 @@
+Odpal aplikację, a następnie w terminalu uruchom komendę
+
+Wzór:
+Invoke-WebRequest -Uri "http://localhost:8080/api/transform" -Method POST -Headers @{"Content-Type"="application/json"} -InFile "C:\ścieżka\do\pliku\request.json"
+
+Invoke-WebRequest -Uri "http://localhost:8080/api/transform" -Method POST -Headers @{"Content-Type"="application/json"} -InFile "C:\Users\wexit\IdeaProjects\IOD-L13-Alpha\src\main\resources\example.json"
+
+Invoke-WebRequest -Uri "http://localhost:8080/api/transform" -Method POST -Headers @{"Content-Type"="application/json"} -InFile "C:\Users\wexit\IdeaProjects\IOD-L13-Alpha\src\main\resources\example2.json"
+
+Invoke-WebRequest -Uri http://localhost:8080/api/transform -Method POST -Headers @{ "Content-Type" = "application/json" } -InFile "src\main\resources\minified.json" -OutFile "src\main\resources\prettified.json"
+
+Invoke-WebRequest -Uri "http://localhost:8080/api/transform?transforms=prettify&transforms=upper" -Method POST -Headers @{ "Content-Type" = "application/json" } -InFile "src\main\resources\minified.json" -OutFile "src\main\resources\output.json"
+
+Invoke-WebRequest -Uri "http://localhost:8080/api/transform?transforms=prettify" -Method POST -Headers @{ "Content-Type" = "application/json" } -InFile "src\main\resources\minified.json" -OutFile "src\main\resources\output2.json"

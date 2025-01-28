@@ -1,32 +1,84 @@
 package pl.put.poznan.transformer.logic;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Function;
+import java.util.ArrayList;
+import java.util.List;
 
+/**
+ * Klasa odpowiedzialna za zarządzanie i wykonywanie transformacji tekstu.
+ *
+ * Tworzy listę transformacji na podstawie przekazanych nazw oraz wykonuje je w ustalonej kolejności
+ * na dostarczonym tekście. Obsługuje różne rodzaje transformacji, takie jak:
+ *
+ * Prettify - formatowanie JSON-a na wersję nie minimalizowaną
+ * Upper - konwersja tekstu na wielkie litery
+ * Lower - konwersja tekstu na małe litery
+ * Reverse - odwracanie kolejności znaków
+ * Minify - minimalizacja JSON-a
+ * Simplify - uproszczenie JSON-a
+ *
+ *
+ *
+ * @author Spitree, sathell, woijk
+ * @version 1.1.4
+ */
 public class TextTransformer {
-    private final String[] transforms;
+    private final List<Transform> transforms;
 
-    private static final Map<String, Function<String, String>> FUNCTIONS = new HashMap<>();
+    /**
+     * Tworzy instancję {@code TextTransformer} na podstawie przekazanych nazw transformacji.
+     *
+     * <p>W konstruktorze mapowane są nazwy transformacji na ich odpowiednie implementacje.
+     * W przypadku nieznanej transformacji lub pustej tablicy nazw, rzucany jest wyjątek.</p>
+     *
+     * @param transformNames tablica nazw transformacji do wykonania
+     * @throws IllegalArgumentException jeśli tablica nazw transformacji jest pusta,
+     *                                  null lub zawiera nieznaną nazwę
+     */
+    public TextTransformer(String[] transformNames) {
+        if (transformNames == null || transformNames.length == 0) {
+            throw new IllegalArgumentException("Transform names cannot be null or empty");
+        }
+        this.transforms = new ArrayList<>();
 
-    static {
-        FUNCTIONS.put("upper", String::toUpperCase);
-        FUNCTIONS.put("lower", String::toLowerCase);
-        FUNCTIONS.put("reverse", text -> new StringBuilder(text).reverse().toString());
-    }
-
-    public TextTransformer(String[] transforms) {
-        this.transforms = transforms;
-    }
-
-    public String transform(String text) {
-        String result = text;
-        for (String transform : transforms) {
-            Function<String, String> function = FUNCTIONS.get(transform.toLowerCase());
-            if (function != null) {
-                result = function.apply(result);
+        // Mapowanie nazw transformacji na ich implementacje
+        for (String transformName : transformNames) {
+            switch (transformName.toLowerCase()) {
+                case "prettify":
+                    transforms.add(new PrettifyTransformer());
+                    break;
+                case "upper":
+                    transforms.add(new UppercaseTransformer());
+                    break;
+                case "lower":
+                    transforms.add(new LowercaseTransformer());
+                    break;
+                case "reverse":
+                    transforms.add(new ReverseTransformer());
+                    break;
+                case "minify":
+                    transforms.add(new MinifierTransformer());
+                    break;
+                case "simplify":
+                    transforms.add(new SimplifyTransformer(new String[]{}));
+                    break;
+                default:
+                    throw new IllegalArgumentException("Unknown transform: " + transformName);
             }
         }
-        return result;
+    }
+
+    /**
+     * Wykonuje wszystkie transformacje na dostarczonym tekście w ustalonej kolejności.
+     *
+     * <p>Każda transformacja modyfikuje tekst, przekazując go do kolejnej transformacji.</p>
+     *
+     * @param text tekst wejściowy, na którym mają zostać wykonane transformacje
+     * @return wynikowy tekst po wykonaniu wszystkich transformacji
+     */
+    public String transform(String text) {
+        for (Transform transform : transforms) {
+            text = transform.transform(text);
+        }
+        return text;
     }
 }
