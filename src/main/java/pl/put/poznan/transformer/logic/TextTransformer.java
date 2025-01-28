@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Klasa odpowiedzialna za zarządzanie i wykonywanie transformacji tekstu.
  *
- * <p>Tworzy listę transformacji na podstawie przekazanych nazw oraz wykonuje je w ustalonej kolejności
+ * Tworzy listę transformacji na podstawie przekazanych nazw oraz wykonuje je w ustalonej kolejności
  * na dostarczonym tekście. Obsługuje różne rodzaje transformacji, takie jak:
  * <ul>
  * <li>Prettify - formatowanie JSON-a na wersję nie minimalizowaną</li>
@@ -16,7 +16,7 @@ import java.util.List;
  * <li>Minify - minimalizacja JSON-a</li>
  * <li>Simplify - uproszczenie JSON-a</li>
  * </ul>
- * </p>
+ *
  *
  * @author Spitree, sathell, woijk
  * @version 1.1.4

@@ -3,12 +3,12 @@ package pl.put.poznan.transformer.model;
 /**
  * Klasa reprezentująca żądanie przekształcenia tekstu.
  *
- * <p>Obiekt tej klasy zawiera dane wejściowe potrzebne do wykonania transformacji tekstu:
+ * Obiekt tej klasy zawiera dane wejściowe potrzebne do wykonania transformacji tekstu:
  * <ul>
  * <li>Tablicę nazw transformacji, które mają zostać wykonane.</li>
  * <li>Tekst, który ma zostać poddany transformacjom.</li>
  * </ul>
- * </p>
+ *
  *
  * @author Spitree, sathell, woijk
  * @version 1.1.4

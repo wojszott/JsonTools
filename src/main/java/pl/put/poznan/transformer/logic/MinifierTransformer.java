@@ -24,12 +24,4 @@ public class MinifierTransformer implements Transform {
             return "Błąd podczas transformacji JSON: " + e.getMessage();
         }
     }
-
-    /**
-     * Domyślny konstruktor dla klasy JsonMinifier.
-     * Inicjalizuje instancję klasy, nie wykonując dodatkowych operacji.
-     */
-    public MinifierTransformer() {
-        // Domyślny konstruktor
-    }
 }

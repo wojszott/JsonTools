@@ -20,6 +20,12 @@ import pl.put.poznan.transformer.model.TextTransformationResponse;
 public class TextTransformerController {
 
     /**
+     * Konstruktor domyślny. Inicjalizuje instancję klasy TextTransformerController.
+     */
+    public TextTransformerController() {
+        // Domyślny konstruktor
+    }
+    /**
      * Obsługuje żądanie przekształcenia tekstu.
      *
      * <p>Przyjmuje tekst wejściowy oraz listę transformacji do wykonania jako parametry.

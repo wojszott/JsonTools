@@ -12,6 +12,12 @@ package pl.put.poznan.transformer.logic;
 public class UppercaseTransformer implements Transform {
 
     /**
+     * Konstruktor domyślny. Inicjalizuje instancję klasy UppercaseTransformer.
+     */
+    public UppercaseTransformer() {
+        // Domyślny konstruktor
+    }
+    /**
      * Przekształca tekst wejściowy, zamieniając wszystkie znaki na wielkie litery.
      *
      * <p>Znaki specjalne lub cyfry pozostają niezmienione.</p>
