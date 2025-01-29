@@ -43,7 +43,7 @@ jobs:
 
       # Wypchnij zmiany do repozytorium
       - name: Push changes
-        run: git push origin main
+        run: git push origin master
 
       # Utwórz tag dla nowej wersji
       - name: Create a new tag
