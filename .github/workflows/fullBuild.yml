@@ -25,7 +25,7 @@ jobs:
         id: increment-version
         run: |
           OLD_VERSION=$(echo "${{ env.version }}")
-          NEW_VERSION=$(echo "$OLD_VERSION" | awk -F. -v OFS=. '{$NF++; print}')
+          NEW_VERSION=$(echo "$OLD_VERSION" | awk -F. -v OFS=. '{$NF++;$NF++; print}')
           echo "New version: $NEW_VERSION"
           echo "new_version=$NEW_VERSION" >> $GITHUB_ENV
 
