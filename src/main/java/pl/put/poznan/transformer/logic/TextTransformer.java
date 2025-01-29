@@ -64,6 +64,9 @@ public class TextTransformer {
                 case "compare":
                     transforms.add(new CompareTransformer(TextToCompare));
                     break;
+                case "remove":
+                    transforms.add(new RemovePropertiesTransformer(badValues));
+                    break;
                 default:
                     throw new IllegalArgumentException("Unknown transform: " + transformName);
             }
