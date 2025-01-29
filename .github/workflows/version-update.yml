@@ -1,5 +1,5 @@
-name: Update Version and Tag
-#test
+name: Update Version and Tag and Release
+
 on:
   push:
     branches:
@@ -11,11 +11,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout repozytorium
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Pobierz aktualną wersję z pom.xml
       - name: Get current version
         id: get-version
         run: |
@@ -23,22 +21,19 @@ jobs:
           echo "Current version: $VERSION"
           echo "version=$VERSION" >> $GITHUB_ENV
 
-      # Inkrementacja wersji (patch version)
       - name: Increment version
         id: increment-version
         run: |
           OLD_VERSION=$(echo "${{ env.version }}")
-          NEW_VERSION=$(echo "$OLD_VERSION" | awk -F. -v OFS=. '{$NF++; print}')
+          NEW_VERSION=$(echo "$OLD_VERSION" | awk -F. -v OFS=. '{$NF++;$NF++; print}')
           echo "New version: $NEW_VERSION"
           echo "new_version=$NEW_VERSION" >> $GITHUB_ENV
 
-      # Debugowanie
       - name: Debug version
         run: |
           echo "Current version: ${{ env.version }}"
           echo "New version: ${{ env.new_version }}"
 
-      # Zaktualizuj wersję w pom.xml
       - name: Update pom.xml with new version
         run: |
           sed -i "s|<version>${{ env.version }}</version>|<version>${{ env.new_version }}</version>|g" pom.xml
@@ -47,13 +42,39 @@ jobs:
           git add pom.xml
           git commit -m "Update version to ${{ env.new_version }}"
 
-      # Wypchnij zmiany do repozytorium
+      - name: Pull latest changes
+        run: |
+          git pull --rebase origin main
+
       - name: Push changes
         run: |
           git push origin main
 
-      # Utwórz tag dla nowej wersji
       - name: Create a new tag
         run: |
           git tag -a "v${{ env.new_version }}" -m "Release version ${{ env.new_version }}"
           git push origin "v${{ env.new_version }}"
+
+      - name: Build application
+        run: |
+          chmod +x mvnw
+          ./mvnw clean package
+
+      - name: Move artifact
+        run: |
+          mkdir -p artifacts
+          cp target/*.jar artifacts/
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: spring-boot-app
+          path: artifacts/
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: "v${{ env.new_version }}"
+          name: "Release v${{ env.new_version }}"
+          body: "Automatyczne wydanie wersji ${{ env.new_version }}"
+          files: artifacts/*.jar
