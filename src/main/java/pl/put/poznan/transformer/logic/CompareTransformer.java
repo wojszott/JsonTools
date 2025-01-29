@@ -32,8 +32,8 @@ public class CompareTransformer implements Transform {
             String line2 = i < lines2.length ? lines2[i] : "";
 
             if (!line1.equals(line2)) {
-                differences.add("Line " + (i + 1) + ":\n" +
-                        "Text 1: " + (line1.isEmpty() ? "(empty)" : line1) + "\n" +
+                differences.add("Line " + (i + 1) + ":\\n" +
+                        "Text 1: " + (line1.isEmpty() ? "(empty)" : line1) + "\\n" +
                         "Text 2: " + (line2.isEmpty() ? "(empty)" : line2));
             }
         }

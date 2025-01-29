@@ -7,13 +7,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TextTransformerTest {
     @Test
     public void testUpperTransformation() {
-        TextTransformer transformer = new TextTransformer(new String[]{"upper"});
+        TextTransformer transformer = new TextTransformer(new String[]{"upper"},null,null,"null");
         assertEquals("HELLO", transformer.transform("hello"));
     }
 
     @Test
     public void testMultipleTransformations() {
-        TextTransformer transformer = new TextTransformer(new String[]{"upper", "reverse"});
+        TextTransformer transformer = new TextTransformer(new String[]{"upper", "reverse"},null,null, "null");
         assertEquals("OLLEH", transformer.transform("hello"));
     }
 }

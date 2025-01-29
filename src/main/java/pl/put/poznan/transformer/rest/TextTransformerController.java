@@ -39,7 +39,10 @@ public class TextTransformerController {
     @PostMapping(consumes = "application/json", produces = "application/json")
     public ResponseEntity<TextTransformationResponse> transformText(
             @RequestBody String text,  // Input text in the request body
-            @RequestParam String[] transforms) {  // Transformations passed as query parameters
+            @RequestParam String[] transforms,
+            @RequestParam(required = false) String[] good_values,
+            @RequestParam(required = false) String[] bad_values,
+            @RequestParam(required = false) String compareFile) {  // Transformations passed as query parameters
 
         // Validate input
         if (transforms == null || transforms.length == 0) {
@@ -47,7 +50,7 @@ public class TextTransformerController {
         }
 
         // Perform the transformation
-        TextTransformer transformer = new TextTransformer(transforms);  // Initialize the transformer
+        TextTransformer transformer = new TextTransformer(transforms,good_values, bad_values, compareFile);  // Initialize the transformer
         String transformedText = transformer.transform(text);  // Transform the text
 
         // Create and return the response
