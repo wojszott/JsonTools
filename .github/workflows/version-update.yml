@@ -56,11 +56,8 @@ jobs:
           git push origin "v${{ env.new_version }}"
 
       - name: Build application
-        run: |
-          - name: Build application
-            run: mvn clean package
-
-
+        run: mvn clean package
+        
       - name: Move artifact
         run: |
           mkdir -p artifacts
