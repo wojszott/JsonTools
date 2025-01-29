@@ -49,7 +49,8 @@ jobs:
 
       # Wypchnij zmiany do repozytorium
       - name: Push changes
-        run: git remote set-url origin https://${{ secrets.Json_ud }}@github.com/wojik/IOD-L13-Alpha.git
+        run: |
+          git remote set-url origin https://${{ secrets.GITHUB_PAT }}@github.com/wojik/100-L13-Alpha.git
           git push origin main
 
       # Utwórz tag dla nowej wersji
