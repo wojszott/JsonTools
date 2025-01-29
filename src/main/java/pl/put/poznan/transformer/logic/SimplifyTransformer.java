@@ -3,28 +3,18 @@ package pl.put.poznan.transformer.logic;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Iterator;
+import java.util.Set;
 
 /**
  * Klasa implementująca transformację polegającą na uproszczeniu struktury JSON poprzez
  * zachowanie tylko określonych właściwości.
- *
- * Transformacja ta pozwala na filtrowanie struktury JSON i zachowanie tylko tych pól,
- * które zostały określone w przekazanym zestawie nazw właściwości.
- *
- * Przykład użycia:
- * String[] properties = {"id", "name"};
- * SimplifyTransformer transformer = new SimplifyTransformer(properties);
- * String result = transformer.transform(jsonString);
  */
 public class SimplifyTransformer implements Transform {
     private final Set<String> propertiesToKeep;
-
 
     /**
      * Tworzy nowy transformer z określonym zestawem właściwości do zachowania.
@@ -47,7 +37,12 @@ public class SimplifyTransformer implements Transform {
         try {
             ObjectMapper mapper = new ObjectMapper();
             JsonNode rootNode = mapper.readTree(input);
-            JsonNode simplifiedNode = simplifyNode(rootNode);
+
+            if (!rootNode.isObject()) {
+                throw new RuntimeException("Root JSON element must be an object.");
+            }
+
+            JsonNode simplifiedNode = simplifyNode((ObjectNode) rootNode, mapper);
             return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(simplifiedNode);
         } catch (Exception e) {
             throw new RuntimeException("Invalid JSON format: " + e.getMessage(), e);
@@ -55,38 +50,22 @@ public class SimplifyTransformer implements Transform {
     }
 
     /**
-     * Rekurencyjnie upraszcza strukturę węzła JSON.
+     * Uproszcza strukturę JSON, pozostawiając tylko określone właściwości.
      *
-     * @param node węzeł JSON do uproszczenia
-     * @return uproszczony węzeł JSON
+     * @param node  obiekt JSON do uproszczenia
+     * @param mapper obiekt Jackson do operacji na JSON
+     * @return uproszczony JSON jako ObjectNode
      */
-    private JsonNode simplifyNode(JsonNode node) {
-        ObjectMapper mapper = new ObjectMapper();
+    private ObjectNode simplifyNode(ObjectNode node, ObjectMapper mapper) {
+        ObjectNode result = mapper.createObjectNode();
+        Iterator<String> fieldNames = node.fieldNames();
 
-        if (node.isObject()) {
-            ObjectNode result = mapper.createObjectNode();
-            Iterator<String> fieldNames = node.fieldNames();
-
-            while (fieldNames.hasNext()) {
-                String fieldName = fieldNames.next();
-                if (propertiesToKeep.contains(fieldName)) {
-                    result.set(fieldName, node.get(fieldName));
-                } else if (node.get(fieldName).isObject() || node.get(fieldName).isArray()) {
-                    JsonNode simplified = simplifyNode(node.get(fieldName));
-                    if (simplified.size() > 0) {
-                        result.set(fieldName, simplified);
-                    }
-                }
+        while (fieldNames.hasNext()) {
+            String fieldName = fieldNames.next();
+            if (propertiesToKeep.contains(fieldName)) {
+                result.set(fieldName, node.get(fieldName));
             }
-            return result;
-        } else if (node.isArray()) {
-            ArrayNode result = mapper.createArrayNode();
-            for (JsonNode element : node) {
-                result.add(simplifyNode(element));
-            }
-            return result;
         }
-
-        return node;
+        return result;
     }
 }

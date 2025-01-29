@@ -9,4 +9,4 @@ Invoke-WebRequest -Uri "http://localhost:8080/api/transform?transforms=prettify"
 
 Invoke-WebRequest -Uri "http://localhost:8080/api/transform?transforms=compare&compareFile=src\main\resources\compare.json" -Method POST -Headers @{ "Content-Type" = "application/json" } -InFile "src\main\resources\OG.json" -OutFile "src\main\resources\diff.json"
 
-Invoke-WebRequest -Uri "http://localhost:8080/api/transform?transforms=simplify&goodvalues={"text"}" -Method POST -Headers @{ "Content-Type" = "application/json" } -InFile "src\main\resources\example.json" -OutFile "src\main\resources\simple.json"
+Invoke-WebRequest -Uri "http://localhost:8080/api/transform?transforms=simplify&good_values=text" -Method POST -Headers @{ "Content-Type" = "application/json" } -InFile "src\main\resources\example.json" -OutFile "src\main\resources\simple.json"
