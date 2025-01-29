@@ -1,1 +1,3 @@
 pl\put\poznan\transformer\logic\TextTransformerTest.class
+pl\put\poznan\transformer\logic\SimplifyTransformerTest.class
+pl\put\poznan\transformer\rest\TextTransformerControllerTest.class

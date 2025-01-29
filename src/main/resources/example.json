@@ -1,4 +1,0 @@
-{
-  "text": "Hello World",
-  "transforms": ["upper", "reverse"]
-}

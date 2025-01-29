@@ -34,7 +34,7 @@ public class TextTransformer {
      * @throws IllegalArgumentException jeśli tablica nazw transformacji jest pusta,
      *                                  null lub zawiera nieznaną nazwę
      */
-    public TextTransformer(String[] transformNames, String[] goodVAlues, String[] badValues, String TextToCompare) {
+    public TextTransformer(String[] transformNames, String[] goodValues, String[] badValues, String TextToCompare) {
         if (transformNames == null || transformNames.length == 0) {
             throw new IllegalArgumentException("Transform names cannot be null or empty");
         }
@@ -59,7 +59,7 @@ public class TextTransformer {
                     transforms.add(new MinifierTransformer());
                     break;
                 case "simplify":
-                    transforms.add(new SimplifyTransformer(goodVAlues));
+                    transforms.add(new SimplifyTransformer(goodValues));
                     break;
                 case "compare":
                     transforms.add(new CompareTransformer(TextToCompare));

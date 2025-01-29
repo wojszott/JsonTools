@@ -40,8 +40,8 @@ public class TextTransformerController {
     public ResponseEntity<TextTransformationResponse> transformText(
             @RequestBody String text,  // Input text in the request body
             @RequestParam String[] transforms,
-            @RequestParam(required = false) String[] good_values,
-            @RequestParam(required = false) String[] bad_values,
+            @RequestParam(required = false) String[] goodValues,
+            @RequestParam(required = false) String[] badValues,
             @RequestParam(required = false) String compareFile) {  // Transformations passed as query parameters
 
         // Validate input
@@ -50,7 +50,7 @@ public class TextTransformerController {
         }
 
         // Perform the transformation
-        TextTransformer transformer = new TextTransformer(transforms,good_values, bad_values, compareFile);  // Initialize the transformer
+        TextTransformer transformer = new TextTransformer(transforms,goodValues, badValues, compareFile);  // Initialize the transformer
         String transformedText = transformer.transform(text);  // Transform the text
 
         // Create and return the response
