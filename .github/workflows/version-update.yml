@@ -32,6 +32,12 @@ jobs:
           echo "New version: $NEW_VERSION"
           echo "new_version=$NEW_VERSION" >> $GITHUB_ENV
 
+      # Debugowanie
+      - name: Debug version
+        run: |
+          echo "Current version: ${{ env.version }}"
+          echo "New version: ${{ env.new_version }}"
+
       # Zaktualizuj wersję w pom.xml
       - name: Update pom.xml with new version
         run: |
@@ -43,7 +49,8 @@ jobs:
 
       # Wypchnij zmiany do repozytorium
       - name: Push changes
-        run: git push origin main
+        run: git remote set-url origin https://${{ secrets.Json_ud }}@github.com/wojik/IOD-L13-Alpha.git
+          git push origin main
 
       # Utwórz tag dla nowej wersji
       - name: Create a new tag
