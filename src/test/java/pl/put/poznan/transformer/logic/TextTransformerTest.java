@@ -4,6 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Klasa testowa dla TextTransformer.
+ */
+
 public class TextTransformerTest {
     @Test
     public void testUpperTransformation() {

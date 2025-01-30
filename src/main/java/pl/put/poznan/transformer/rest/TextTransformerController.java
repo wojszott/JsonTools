@@ -5,54 +5,45 @@ import org.springframework.web.bind.annotation.*;
 import pl.put.poznan.transformer.logic.TextTransformer;
 
 /**
- * Kontroler REST API obsługujący przekształcanie tekstu.
- *
- * Klasa ta definiuje punkt końcowy API dostępny pod adresem {@code /api/transform},
- * który umożliwia wykonywanie transformacji tekstu na podstawie określonych operacji
+ * Kontroler REST do transformacji tekstu.
+ * Udostępnia endpoint POST /api/transform do wykonywania operacji na tekście.
  *
  * @author Spitree, sathell, woijk
- * @version 1.1.4
+ * @version 1.1.5
  */
 @RestController
 @RequestMapping("/api/transform")
 public class TextTransformerController {
 
     /**
-     * Konstruktor domyślny. Inicjalizuje instancję klasy TextTransformerController.
-     */
-    public TextTransformerController() {
-        // Domyślny konstruktor
-    }
-    /**
-     * Obsługuje żądanie przekształcenia tekstu.
-     *
-     * Przyjmuje tekst wejściowy oraz listę transformacji do wykonania jako parametry.
-     * Wynik transformacji jest zwracany w formacie JSON w odpowiedzi.
-     *
-     * @param text tekst wejściowy do przekształcenia
-     * @param transforms tablica nazw transformacji do zastosowania na tekście
-     * @return obiekt {@link ResponseEntity} zawierający wynik transformacji w postaci String
-     *         lub komunikat o błędzie w przypadku nieprawidłowych danych wejściowych
+     * Obsługuje żądanie transformacji tekstu
+     * @param request obiekt żądania zawierający:
+     * <ul>
+     *   <li>text - tekst wejściowy</li>
+     *   <li>transforms - lista transformacji do zastosowania</li>
+     *   <li>goodValues - opcjonalne wartości poprawne</li>
+     *   <li>badValues - opcjonalne wartości błędne</li>
+     *   <li>compareFile - opcjonalna nazwa pliku porównawczego</li>
+     * </ul>
+     * @return ResponseEntity z przetworzonym tekstem lub komunikatem błędu:
+     * <ul>
+     *   <li>200 OK z wynikiem jeśli sukces</li>
+     *   <li>400 Bad Request jeśli brak transformacji</li>
+     * </ul>
      */
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public ResponseEntity<String> transformText(
-            @RequestBody String text,  // Input text in the request body
-            @RequestParam String[] transforms,
-            @RequestParam(required = false) String[] goodValues,
-            @RequestParam(required = false) String[] badValues,
-            @RequestParam(required = false) String compareFile) {  // Transformations passed as query parameters
-
-        // Validate input
-        if (transforms == null || transforms.length == 0) {
+    public ResponseEntity<String> transformText(@RequestBody TransformRequest request) {
+        if (request.getTransforms() == null || request.getTransforms().length == 0) {
             return ResponseEntity.badRequest().body("No transforms specified");
         }
 
-        // Perform the transformation
-        TextTransformer transformer = new TextTransformer(transforms,goodValues, badValues, compareFile);  // Initialize the transformer
-        String transformedText = transformer.transform(text);  // Transform the text
+        TextTransformer transformer = new TextTransformer(
+                request.getTransforms(),
+                request.getGoodValues(),
+                request.getBadValues(),
+                request.getCompareFile()
+        );
 
-        // Return the response
-        return ResponseEntity.ok(transformedText);
+        return ResponseEntity.ok(transformer.transform(request.getText()));
     }
-
 }
