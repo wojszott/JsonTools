@@ -1,13 +1,13 @@
 pl\put\poznan\transformer\logic\RemovePropertiesTransformer.class
 pl\put\poznan\transformer\logic\MinifierTransformer.class
-pl\put\poznan\transformer\logic\Transform.class
 pl\put\poznan\transformer\model\TextTransformationRequest.class
+pl\put\poznan\transformer\app\TextTransformerApplication.class
+pl\put\poznan\transformer\rest\TextTransformerController.class
+pl\put\poznan\transformer\logic\ReverseTransformer.class
+pl\put\poznan\transformer\logic\Transform.class
 pl\put\poznan\transformer\logic\PrettifyTransformer.class
 pl\put\poznan\transformer\logic\SimplifyTransformer.class
 pl\put\poznan\transformer\logic\LowercaseTransformer.class
 pl\put\poznan\transformer\logic\CompareTransformer.class
 pl\put\poznan\transformer\logic\UppercaseTransformer.class
-pl\put\poznan\transformer\app\TextTransformerApplication.class
-pl\put\poznan\transformer\rest\TextTransformerController.class
-pl\put\poznan\transformer\logic\ReverseTransformer.class
 pl\put\poznan\transformer\logic\TextTransformer.class

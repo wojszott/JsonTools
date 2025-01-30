@@ -74,7 +74,7 @@ public class TextTransformer {
                         // throw new RuntimeException("Error while creating CompareTransformer", e);
                     }
                     break;
-                case "remove":
+                case "delete":
                     transforms.add(new RemovePropertiesTransformer(badValues));
                     break;
                 default:
