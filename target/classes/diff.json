@@ -1,0 +1,9 @@
+{
+"differences": [
+{
+"line": 4,
+"text1": "\"skills\": [\"Java\", \"Spring Boot\"]",
+"text2": "\"skills\": [\"Java\", \"Spring Boot\", \"REST APIs\"]"
+}
+]
+}

@@ -1,0 +1,1 @@
+{"name":"John Doe","age":29,"address":{"street":"123 Elm Street","city":"Metropolis","zipcode":"54321"},"email":"johndoe@example.com","skills":["Java","Spring Boot","REST APIs"],"projects":[{"name":"Text Transformer","status":"Completed"},{"name":"E-commerce Platform","status":"In Progress"}]}
