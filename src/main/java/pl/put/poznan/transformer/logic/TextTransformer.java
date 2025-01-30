@@ -4,21 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.io.IOException;
 
-
-
 /**
  * Klasa odpowiedzialna za zarządzanie i wykonywanie transformacji tekstu.
- *
  * Tworzy listę transformacji na podstawie przekazanych nazw oraz wykonuje je w ustalonej kolejności
  * na dostarczonym tekście. Obsługuje różne rodzaje transformacji, takie jak:
  *
- * Prettify - formatowanie JSON-a na wersję nie minimalizowaną
- * Upper - konwersja tekstu na wielkie litery
- * Lower - konwersja tekstu na małe litery
- * Reverse - odwracanie kolejności znaków
- * Minify - minimalizacja JSON-a
- * Simplify - uproszczenie JSON-a
- *
+ *   Prettify - formatowanie JSON-a na wersję nie minimalizowaną
+ *   Upper - konwersja tekstu na wielkie litery
+ *   Lower - konwersja tekstu na małe litery
+ *   Reverse - odwracanie kolejności znaków
+ *   Minify - minimalizacja JSON-a
+ *   Simplify - uproszczenie JSON-a
  *
  *
  * @author Spitree, sathell, woijk
@@ -29,11 +25,13 @@ public class TextTransformer {
 
     /**
      * Tworzy instancję {@code TextTransformer} na podstawie przekazanych nazw transformacji.
-     *
      * <p>W konstruktorze mapowane są nazwy transformacji na ich odpowiednie implementacje.
      * W przypadku nieznanej transformacji lub pustej tablicy nazw, rzucany jest wyjątek.</p>
      *
      * @param transformNames tablica nazw transformacji do wykonania
+     * @param goodValues tablica dobrych wartości używanych w transformacjach
+     * @param badValues tablica złych wartości używanych w transformacjach
+     * @param TextToCompare tekst, który ma zostać porównany w transformacji "compare"
      * @throws IllegalArgumentException jeśli tablica nazw transformacji jest pusta,
      *                                  null lub zawiera nieznaną nazwę
      */
@@ -85,7 +83,6 @@ public class TextTransformer {
 
     /**
      * Wykonuje wszystkie transformacje na dostarczonym tekście w ustalonej kolejności.
-     *
      * <p>Każda transformacja modyfikuje tekst, przekazując go do kolejnej transformacji.</p>
      *
      * @param text tekst wejściowy, na którym mają zostać wykonane transformacje
