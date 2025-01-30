@@ -76,33 +76,6 @@ class SimplifyTransformerTest {
     }
 
     /**
-     * Test transformacji tablicy obiektów JSON.
-     */
-    @Test
-    void testArrayJson() {
-        String input = """
-            [
-                {
-                    "id": 1,
-                    "name": "Test1",
-                    "age": 25
-                },
-                {
-                    "id": 2,
-                    "name": "Test2",
-                    "age": 30
-                }
-            ]""";
-
-        //String result = transformerBasic.transform(input);
-        //assertTrue(result.contains("\"id\" : 1"));
-        //assertTrue(result.contains("\"name\" : \"Test1\""));
-        //assertTrue(result.contains("\"id\" : 2"));
-        //assertTrue(result.contains("\"name\" : \"Test2\""));
-        //assertFalse(result.contains("\"age\""));
-    }
-
-    /**
      * Test obsługi niepoprawnego JSON.
      */
     @Test
