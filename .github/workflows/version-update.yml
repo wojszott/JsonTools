@@ -14,24 +14,27 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Get current version
+      - name: Install xpath (for parsing pom.xml)
+        run: sudo apt-get install -y libxml-xpath-perl
+
+      - name: Get current project version
         id: get-version
         run: |
-          # Wydobądź wersję z pom.xml (np. "0.1" → "0.1.0")
-          VERSION=$(grep -oPm1 "(?<=<version>)[^<]+" pom.xml)
-          echo "Current version: $VERSION"
+          # Pobierz wersję projektu
+          PROJECT_VERSION=$(xpath -q -e '/project/version/text()' pom.xml)
+          echo "Current project version: $PROJECT_VERSION"
           
-          # Dodaj trzeci segment (Z), jeśli go brakuje (np. "0.1" → "0.1.0")
-          if [[ "$VERSION" =~ ^[0-9]+\.[0-9]+$ ]]; then
-            VERSION="$VERSION.0"
+          # Dodaj trzeci segment (Z), jeśli brakuje (np. "0.1" → "0.1.0")
+          if [[ "$PROJECT_VERSION" =~ ^[0-9]+\.[0-9]+$ ]]; then
+            PROJECT_VERSION="$PROJECT_VERSION.0"
           fi
           
-          echo "version=$VERSION" >> $GITHUB_ENV
+          echo "project_version=$PROJECT_VERSION" >> $GITHUB_ENV
 
-      - name: Increment version (X.Y.Z)
+      - name: Increment project version (X.Y.Z)
         id: increment-version
         run: |
-          OLD_VERSION=$(echo "${{ env.version }}")
+          OLD_VERSION=$(echo "${{ env.project_version }}")
           IFS='.' read -r -a VERSION_PARTS <<< "$OLD_VERSION"
           
           MAJOR=${VERSION_PARTS[0]}
@@ -42,23 +45,22 @@ jobs:
           PATCH=$((PATCH + 1))
           NEW_VERSION="$MAJOR.$MINOR.$PATCH"
           
-          echo "New version: $NEW_VERSION"
-          echo "new_version=$NEW_VERSION" >> $GITHUB_ENV
+          echo "New project version: $NEW_VERSION"
+          echo "new_project_version=$NEW_VERSION" >> $GITHUB_ENV
 
       - name: Debug version
         run: |
-          echo "Current version: ${{ env.version }}"
-          echo "New version: ${{ env.new_version }}"
+          echo "Current project version: ${{ env.project_version }}"
+          echo "New project version: ${{ env.new_project_version }}"
 
       - name: Update pom.xml with new version
         run: |
-          # Zamień starą wersję na nową (np. "0.1" → "0.1.1")
-          sed -i "s|<version>${{ env.version }}</version>|<version>${{ env.new_version }}</version>|g" pom.xml
+          mvn versions:set -DnewVersion=${{ env.new_project_version }} -DgenerateBackupPoms=false
           
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add pom.xml
-          git commit -m "Update version to ${{ env.new_version }}"
+          git commit -m "Update PROJECT version to ${{ env.new_project_version }}"
 
       - name: Pull latest changes
         run: |
@@ -70,8 +72,8 @@ jobs:
 
       - name: Create a new tag (vX.Y.Z)
         run: |
-          git tag -a "v${{ env.new_version }}" -m "Release version ${{ env.new_version }}"
-          git push origin "v${{ env.new_version }}"
+          git tag -a "v${{ env.new_project_version }}" -m "Release version ${{ env.new_project_version }}"
+          git push origin "v${{ env.new_project_version }}"
 
       - name: Build application
         run: mvn clean package
@@ -90,7 +92,7 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: "v${{ env.new_version }}"
-          name: "Release v${{ env.new_version }}"
-          body: "Automatyczne wydanie wersji ${{ env.new_version }}"
+          tag_name: "v${{ env.new_project_version }}"
+          name: "Release v${{ env.new_project_version }}"
+          body: "Automatyczne wydanie wersji ${{ env.new_project_version }}"
           files: artifacts/*.jar
