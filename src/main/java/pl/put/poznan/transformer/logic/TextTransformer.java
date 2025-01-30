@@ -2,6 +2,9 @@ package pl.put.poznan.transformer.logic;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.IOException;
+
+
 
 /**
  * Klasa odpowiedzialna za zarządzanie i wykonywanie transformacji tekstu.
@@ -62,7 +65,14 @@ public class TextTransformer {
                     transforms.add(new SimplifyTransformer(goodValues));
                     break;
                 case "compare":
-                    transforms.add(new CompareTransformer(TextToCompare));
+                    try {
+                        transforms.add(new CompareTransformer(TextToCompare));
+                    } catch (IOException e) {
+                        // Obsługuje wyjątek, np. loguje błąd lub informuje użytkownika
+                        System.err.println("Error occurred while reading the file: " + e.getMessage());
+                        // Możesz również ponownie rzucić wyjątek, jeśli chcesz przerwać działanie
+                        // throw new RuntimeException("Error while creating CompareTransformer", e);
+                    }
                     break;
                 case "remove":
                     transforms.add(new RemovePropertiesTransformer(badValues));

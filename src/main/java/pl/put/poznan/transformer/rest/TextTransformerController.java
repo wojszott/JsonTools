@@ -3,8 +3,6 @@ package pl.put.poznan.transformer.rest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.put.poznan.transformer.logic.TextTransformer;
-import pl.put.poznan.transformer.model.TextTransformationRequest;
-import pl.put.poznan.transformer.model.TextTransformationResponse;
 
 /**
  * Kontroler REST API obsługujący przekształcanie tekstu.
@@ -33,11 +31,11 @@ public class TextTransformerController {
      *
      * @param text tekst wejściowy do przekształcenia
      * @param transforms tablica nazw transformacji do zastosowania na tekście
-     * @return obiekt {@link ResponseEntity} zawierający wynik transformacji w postaci {@link TextTransformationResponse}
+     * @return obiekt {@link ResponseEntity} zawierający wynik transformacji w postaci String
      *         lub komunikat o błędzie w przypadku nieprawidłowych danych wejściowych
      */
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public ResponseEntity<TextTransformationResponse> transformText(
+    public ResponseEntity<String> transformText(
             @RequestBody String text,  // Input text in the request body
             @RequestParam String[] transforms,
             @RequestParam(required = false) String[] goodValues,
@@ -46,16 +44,15 @@ public class TextTransformerController {
 
         // Validate input
         if (transforms == null || transforms.length == 0) {
-            return ResponseEntity.badRequest().body(new TextTransformationResponse(text, "No transforms specified"));
+            return ResponseEntity.badRequest().body("No transforms specified");
         }
 
         // Perform the transformation
         TextTransformer transformer = new TextTransformer(transforms,goodValues, badValues, compareFile);  // Initialize the transformer
         String transformedText = transformer.transform(text);  // Transform the text
 
-        // Create and return the response
-        TextTransformationResponse response = new TextTransformationResponse(text, transformedText);
-        return ResponseEntity.ok(response);
+        // Return the response
+        return ResponseEntity.ok(transformedText);
     }
 
 }

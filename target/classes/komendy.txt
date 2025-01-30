@@ -9,4 +9,17 @@ Invoke-WebRequest -Uri "http://localhost:8080/api/transform?transforms=prettify"
 
 Invoke-WebRequest -Uri "http://localhost:8080/api/transform?transforms=compare&compareFile=src\main\resources\compare.json" -Method POST -Headers @{ "Content-Type" = "application/json" } -InFile "src\main\resources\OG.json" -OutFile "src\main\resources\diff.json"
 
-Invoke-WebRequest -Uri "http://localhost:8080/api/transform?transforms=simplify&good_values=text" -Method POST -Headers @{ "Content-Type" = "application/json" } -InFile "src\main\resources\example.json" -OutFile "src\main\resources\simple.json"
+Invoke-WebRequest -Uri "http://localhost:8080/api/transform?transforms=simplify&goodValues=name" -Method POST -Headers @{ "Content-Type" = "application/json" } -InFile "src\main\resources\OG.json" -OutFile "src\main\resources\With.json"
+
+Komendy testowe:
+
+Mini:
+Invoke-WebRequest -Uri "http://localhost:8080/api/transform?transforms=minify" -Method POST -Headers @{ "Content-Type" = "application/json" } -InFile "src\main\resources\ToMinify.json" -OutFile "src\main\resources\Mini.json"
+Pretty:
+Invoke-WebRequest -Uri "http://localhost:8080/api/transform?transforms=prettify" -Method POST -Headers @{ "Content-Type" = "application/json" } -InFile "src\main\resources\Mini.json" -OutFile "src\main\resources\Unmini.json"
+With:
+Invoke-WebRequest -Uri "http://localhost:8080/api/transform?transforms=simplify&goodValues=name" -Method POST -Headers @{ "Content-Type" = "application/json" } -InFile "src\main\resources\OG.json" -OutFile "src\main\resources\With.json"
+Without:
+Invoke-WebRequest- Uri "http://localhost:8080/api/transform?transforms=remove&null&badValues=name" -Method POST -Headers @{ "Content-Type" = "application/json" } -InFile "src\main\resources\OG.json" -OutFile "src\main\resources\Without.json"
+Compare:
+Invoke-WebRequest -Uri "http://localhost:8080/api/transform?transforms=compare&compareFile=src\main\resources\compare.json" -Method POST -Headers @{ "Content-Type" = "application/json" } -InFile "src\main\resources\OG.json" -OutFile "src\main\resources\diff.json"

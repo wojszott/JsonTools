@@ -1,11 +1,7 @@
 package pl.put.poznan.transformer.rest;
 
 import org.junit.jupiter.api.Test;
-import pl.put.poznan.transformer.logic.TextTransformer;
 import pl.put.poznan.transformer.model.TextTransformationRequest;
-import pl.put.poznan.transformer.model.TextTransformationResponse;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
