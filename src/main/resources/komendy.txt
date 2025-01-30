@@ -23,3 +23,5 @@ Without:
 Invoke-WebRequest -Uri "http://localhost:8080/api/transform?transforms=delete&badValues=name" -Method POST -Headers @{ "Content-Type" = "application/json" } -InFile "src\main\resources\OG.json" -OutFile "src\main\resources\Without.json"
 Compare:
 Invoke-WebRequest -Uri "http://localhost:8080/api/transform?transforms=compare&compareFile=src\main\resources\compare.json" -Method POST -Headers @{ "Content-Type" = "application/json" } -InFile "src\main\resources\OG.json" -OutFile "src\main\resources\diff.json"
+Validate:
+Invoke-WebRequest -Uri "http://localhost:8080/api/transform?transforms=validate" -Method POST -Headers @{ "Content-Type" = "application/json" } -InFile "src\main\resources\ToValidate.json" -OutFile "src\main\resources\Without.json"

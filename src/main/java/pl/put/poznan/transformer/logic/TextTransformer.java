@@ -75,6 +75,9 @@ public class TextTransformer {
                 case "delete":
                     transforms.add(new RemovePropertiesTransformer(badValues));
                     break;
+                case "validate":
+                    transforms.add(new JsonValidationTransformer("example-schema.json"));
+                    break;
                 default:
                     throw new IllegalArgumentException("Unknown transform: " + transformName);
             }
