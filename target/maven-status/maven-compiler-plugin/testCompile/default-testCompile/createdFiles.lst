@@ -1,4 +1,6 @@
+pl\put\poznan\transformer\logic\MinifierMockTest$1.class
 pl\put\poznan\transformer\logic\MinifierTransformerTest.class
 pl\put\poznan\transformer\logic\TextTransformerTest.class
+pl\put\poznan\transformer\logic\MinifierMockTest.class
 pl\put\poznan\transformer\logic\SimplifyTransformerTest.class
 pl\put\poznan\transformer\rest\TextTransformerControllerTest.class
