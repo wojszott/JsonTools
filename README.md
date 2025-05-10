@@ -1,13 +1,16 @@
-# IOD-L13-Alpha
-Projekt JSON Tools
+# Projekt JSON Tools
+Projekt grupowy w Javie zajmujący się stworzeniem aplikacji obsługującej pliki Json
 
-Członkowie:
-Sprint #1
-Scrum Master: Wojciech Szott 155876 (Spitree)
-Proxy Product Owner: Paweł Muryn 156011 (sathell)
-Developer #1: Wojciech Kazimierski 156004 (wojik)
+### Zespół
+Był to projekt 3 osobowy, ja zajmowałem rolę Scrum Mastera  
+Moja rola:  
+-ogranizacja i podział zadań  
+-stworzenie podstawowego szkieletu obługi plików Json z REST API  
+-organizacja repozytorium na Githubie  
+-dokumentacja automatyczna javadoc  
+-rejestr produktu i sprintu  
+-parę funkcji: Comapare, Minifier,TextTransformer,Transform, TextTransformerController, Text TransformerRequest  
+-test jedonostkowy z mock object  
 
-Sprint #2
-Scrum Master: Wojciech Kazimierski 156004 (wojik)
-Proxy Product Owner:  Wojciech Szott 155876 (Spitree)
-Developer #1: Paweł Muryn 156011 (sathell)
+### Status projektu
+Projetk ukończony w 2 Sprintach
