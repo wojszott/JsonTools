@@ -13,4 +13,4 @@ Moja rola:
 -test jedonostkowy z mock object  
 
 ### Status projektu
-Projetk ukończony w 2 Sprintach
+Projekt ukończony w 2 Sprintach
